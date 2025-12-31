@@ -1,0 +1,77 @@
+
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>華容放曹：關羽吃寶箱（最短路徑）</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<header>
+  <h1>華容放曹（關羽吃寶箱）最短路徑求解器</h1>
+  <p class="subtitle">棋盤 4×7，棋子：C(2×2)、G/H(2×1)、V(1×2)、S(1×1)、.(空)、X(寶箱/可覆蓋)</p>
+</header>
+
+<main>
+  <section class="io">
+    <div class="input-controls">
+      <label for="mapFile">載入 map.txt：</label>
+      <input id="mapFile" type="file" accept=".txt" />
+      <button id="btnLoadExample" type="button">載入範例</button>
+    </div>
+
+    <div class="paste-area">
+      <label for="mapText">或貼上盤面文字（7 行 × 每行 4 字）：</label>
+      <textarea id="mapText" rows="10" placeholder="例如：
+CCSV
+CCSV
+VGGS
+VSHH
+X.HH
+VVVV
+VVVV"></textarea>
+      <div class="hint">注意：X 為 1×1 寶箱，只是目標格，當解析棋子形狀時會視為 '.'。</div>
+      <button id="btnSolve" type="button">開始求解（BFS）</button>
+    </div>
+  </section>
+
+  <section class="status">
+    <div id="statusMsg">尚未載入盤面。</div>
+    <div class="meta">
+      <span>棋盤尺寸：<strong id="boardSize">—</strong></span>
+      <span>步數：<strong id="stepCount">—</strong></span>
+    </div>
+  </section>
+
+  <section class="board">
+    <div id="boardGrid" class="grid"></div>
+  </section>
+
+  <section class="controls">
+    <button id="btnReplay" type="button" disabled>逐步回放</button>
+    <button id="btnPrev" type="button" disabled>上一步</button>
+    <button id="btnNext" type="button" disabled>下一步</button>
+    <span id="replayPos">—/—</span>
+  </section>
+
+  <section class="steps">
+    <h2>步驟</h2>
+    <ol id="stepList"></ol>
+  </section>
+</main>
+
+<footer>
+  <div>最後更新時間：<span id="lastUpdated"></span></div>
+  <div>作者：顏士傑｜Solver 以 BFS 設計，X 為透明目標格。</div>
+</footer>
+
+<script>
+  const BUILD_TIME_STRING = '2026-01-01 02:29:48 GMT+8';
+  window.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('lastUpdated').textContent = BUILD_TIME_STRING;
+  });
+</script>
+<script src="app.js"></script>
+</body>
+</html>
