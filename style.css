@@ -15,10 +15,10 @@ header h1 { margin: 0 0 8px; }
 .subtitle { margin: 0 0 16px; opacity: 0.8; }
 section { margin: 16px 0; padding: 12px; background: var(--card); border-radius: 12px; }
 .input-controls, .paste-area { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-textarea { width: 100%; max-width: 740px; background: #0b1020; color: var(--text); border: 1px solid #263040; border-radius: 8px; padding: 8px; }
+textarea { width: 100%; max-width: 640px; background: #0b1020; color: var(--text); border: 1px solid #263040; border-radius: 8px; padding: 8px; }
 button { background: #0ea5e9; color: #001019; border: none; border-radius: 8px; padding: 8px 12px; cursor: pointer; font-weight: 600; }
 button:disabled { background: #334155; color: #94a3b8; cursor: not-allowed; }
-.status .meta { display: flex; gap: 24px; margin-top: 8px; opacity: 0.9; flex-wrap: wrap; }
+.status .meta { display: flex; gap: 24px; margin-top: 8px; opacity: 0.9; }
 .grid { display: grid; grid-template-columns: repeat(4, var(--cell-size)); grid-template-rows: repeat(7, var(--cell-size)); gap: var(--gap); padding: var(--gap); background: #0b1020; border: 1px solid var(--grid-border); border-radius: 10px; width: fit-content; }
 /* 棋子樣式 */
 .cell { width: var(--cell-size); height: var(--cell-size); display: flex; align-items: center; justify-content: center; border: 1px dashed #1f2937; border-radius: 6px; font-weight: 700; position: relative; }
@@ -28,8 +28,9 @@ button:disabled { background: #334155; color: #94a3b8; cursor: not-allowed; }
 .c-S { background: #93c5fd; color: #001a2b; }
 .c-dot { background: #0b1020; color: #64748b; }
 .cell.c-X { outline: 2px solid var(--accent); }
+
+/* 運行中的反饋 */
 .spinner { display: inline-block; width: 1em; height: 1em; border: 2px solid rgba(255,255,255,0.4); border-top-color: var(--accent); border-radius: 50%; margin-right: 8px; animation: spin 0.8s linear infinite; }
 @keyframes spin { from { transform: rotate(0deg);} to { transform: rotate(360deg);} }
 .grid.is-busy { opacity: 0.7; filter: saturate(0.9); transition: opacity 0.2s ease; }
 textarea:disabled { background: #0a0f1e; color: #7a8699; border-color: #2a3445; cursor: not-allowed; }
-.replay-controls { display:flex; gap:12px; align-items:center; }

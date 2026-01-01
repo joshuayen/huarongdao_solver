@@ -1,36 +1,46 @@
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>華容放曹 — 合併版（吃寶箱 BFS ＋ 曹操脫逃 A*）</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>華容放曹：關羽吃寶箱（最短路徑）</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>華容放曹：關羽吃寶箱（最短路徑 BFS）＋ 曹操脫逃（高效 A*）</h1>
-    <p class="subtitle">棋盤 4×7；棋子：C(2×2)、G/H(2×1)、V(1×2)、S(1×1)、.(空)、X(寶箱/可覆蓋)。頁面最後更新時間：<span id="lastUpdated"></span></p>
-  </header>
+<header>
+  <h1>華容放曹（關羽吃寶箱）最短路徑求解器</h1>
+  <p class="subtitle">棋盤 4x7，棋子：C(2x2)、G/H(2x1)、V(1x2)、S(1x1)、.(空)、X(寶箱/可覆蓋)</p>
+</header>
 
-  <section class="input-controls">
-    <button id="btnLoadExample">載入範例</button>
-    <input id="mapFile" type="file" accept=".txt" />
-    <button id="btnSolveChest">開始求解（BFS：關羽吃寶箱）</button>
-    <button id="btnSolveExit">曹操脫逃（A*：出口）</button>
-  </section>
+<main>
+  <section class="io">
+    <div class="input-controls">
+      <label for="mapFile">載入 map.txt：</label>
+      <input id="mapFile" type="file" accept=".txt" />
+      <button id="btnLoadExample" type="button">載入範例</button>
+    </div>
 
-  <section class="paste-area">
-    <textarea id="mapText" rows="8" placeholder="請貼上 7 行、每行 4 字元的棋盤文字（或載入範例）"></textarea>
+    <div class="paste-area">
+      <label for="mapText">或貼上盤面文字（7 行 x 每行 4 字）：</label>
+      <textarea id="mapText" rows="10" placeholder="例如:
+CCSV
+CCSV
+VGGS
+VSHH
+X.HH
+VVVV
+VVVV"></textarea>
+      <div class="hint">注意：X 為 1x1 寶箱，只是目標格，當解析棋子形狀時會視為 '.'。</div>
+      <button id="btnSolve" type="button">開始求解 (BFS)</button>
+    </div>
   </section>
 
   <section class="status">
     <div id="statusMsg">尚未載入盤面。</div>
     <div class="meta">
-      <div>棋盤尺寸：<span id="boardSize">—</span></div>
-      <div>步數：<span id="stepCount">—</span></div>
-      <div>效能（μs）：<span id="perfLoad">讀檔—</span>／<span id="perfSolve">求解—</span>／<span id="perfTotal">總計—</span></div>
-      <div>節點：<span id="nodesExpanded">展開—</span>／<span id="statesVisited">訪問—</span>／<span id="peakQueue">峰值—</span></div>
+      <span>棋盤尺寸：<strong id="boardSize">—</strong></span>
+      <span>步數：<strong id="stepCount">—</strong></span>
     </div>
   </section>
 
@@ -38,17 +48,30 @@
     <div id="boardGrid" class="grid"></div>
   </section>
 
-  <section class="replay">
-    <div class="replay-controls">
-      <button id="btnReplay" disabled>逐步回放</button>
-      <button id="btnPrev" disabled>上一步</button>
-      <button id="btnNext" disabled>下一步</button>
-      <span id="replayPos">—/—</span>
-    </div>
-    <h4>步驟</h4>
-    <ol id="stepList"></ol>
+  <section class="controls">
+    <button id="btnReplay" type="button" disabled>逐步回放</button>
+    <button id="btnPrev" type="button" disabled>上一步</button>
+    <button id="btnNext" type="button" disabled>下一步</button>
+    <span id="replayPos">—/—</span>
   </section>
 
-  <script src="app.js"></script>
+  <section class="steps">
+    <h2>步驟</h2>
+    <ol id="stepList"></ol>
+  </section>
+</main>
+
+<footer>
+  <div>最後更新時間：<span id="lastUpdated"></span></div>
+  <div>作者：JoshuaYen｜Solver 以 BFS 設計，X 為透明目標格。</div>
+</footer>
+
+<script>
+  (function(){
+    var el = document.getElementById('lastUpdated');
+    el.textContent = '2026-01-01 02:50:49 GMT+8';
+  })();
+</script>
+<script src="app.js"></script>
 </body>
 </html>
